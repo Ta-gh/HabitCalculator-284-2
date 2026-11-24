@@ -43,9 +43,9 @@ namespace HabitCalculator
                         Console.WriteLine("Функция приседаний пока не реализована.");
                         break;
                     case "7":
-                        // TODO: Студент 7: Добавить вызов функции CalculateWorkoutCalories()
-                        Console.WriteLine("Функция калорий тренировки пока не реализована.");
+                        CalculateWorkoutCalories();
                         break;
+
                     case "8":
                         // TODO: Студент 8: Добавить вызов функции CalculateSleep()
                         Console.WriteLine("Функция качества сна пока не реализована.");
@@ -138,7 +138,30 @@ namespace HabitCalculator
         // СТУДЕНТ 6: Добавьте сюда метод CalculateSquats()
         //
         // СТУДЕНТ 7: Добавьте сюда метод CalculateWorkoutCalories()
-        //
+        static void CalculateWorkoutCalories()
+        {
+            Console.Write("Введите название тренировки: ");
+            string workout = Console.ReadLine();
+            Console.Write("Сколько минут длилась тренировка? ");
+            int minutes = int.Parse(Console.ReadLine());
+            Console.Write("Оцените интенсивность (от 1 до 10): ");
+            int intensity = int.Parse(Console.ReadLine());
+            double weightKg = 70.0;
+            double caloriesBurned = (intensity * 3.5 * weightKg * minutes) / 200.0;
+            Console.WriteLine($"\nРезультаты:");
+            Console.WriteLine($"Тренировка: {workout}");
+            Console.WriteLine($"Длительность: {minutes} минут");
+            Console.WriteLine($"Интенсивность: {intensity}/10");
+            Console.WriteLine($"Потрачено калорий: {caloriesBurned:F0} ккал");
+            Console.Write("\nРекомендация: ");
+            if (caloriesBurned < 150)
+                Console.WriteLine("Тренировка была лёгкой. Попробуйте увеличить интенсивность или продолжительность!");
+            else if (caloriesBurned < 350)
+                Console.WriteLine("Хорошая тренировка! Отличный вклад в форму.");
+            else
+                Console.WriteLine("Отлично! Вы отлично потрудились. Не забывайте про восстановление.");
+        }
+
         // СТУДЕНТ 8: Добавьте сюда метод CalculateSleep()
         //
         // СТУДЕНТ 9: Добавьте сюда метод CalculateBMI()
