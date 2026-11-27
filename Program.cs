@@ -35,8 +35,7 @@ namespace HabitCalculator
                         Console.WriteLine("Функция подсчёта калорий пока не реализована.");
                         break;
                     case "5":
-                        // TODO: Студент 5: Добавить вызов функции CalculateMeditation()
-                        Console.WriteLine("Функция минут медитации пока не реализована.");
+                        CalculateMeditation();
                         break;
                     case "6":
                         // TODO: Студент 6: Добавить вызов функции CalculateSquats()
@@ -133,8 +132,56 @@ namespace HabitCalculator
         //
         // СТУДЕНТ 4: Добавьте сюда метод CalculateCalories()
         //
-        // СТУДЕНТ 5: Добавьте сюда метод CalculateMeditation()
-        //
+    
+        static void CalculateMeditation()
+        {
+        Console.Write("Введите время начала (ЧЧ:ММ): ");
+        if (!TimeOnly.TryParse(Console.ReadLine(), out var startTime))
+        {
+            Console.WriteLine("Неверный формат времени.");
+            return;
+        }
+
+        Console.Write("Введите время конца (ЧЧ:ММ): ");
+        if (!TimeOnly.TryParse(Console.ReadLine(), out var endTime))
+        {
+            Console.WriteLine("Неверный формат времени.");
+            return;
+        }
+
+        TimeSpan duration = endTime >= startTime
+            ? endTime - startTime
+            : (TimeOnly.MaxValue - startTime) + (endTime - TimeOnly.MinValue) + TimeSpan.FromTicks(1);
+
+        Console.WriteLine("Выберите формат вывода:");
+        Console.WriteLine("1 - Часы и минуты");
+        Console.WriteLine("2 - В минутах");
+        Console.WriteLine("3 - В часах (десятичная дробь)");
+        Console.WriteLine("4 - В секундах");
+        Console.Write("Ваш выбор: ");
+
+        string? choice = Console.ReadLine();
+
+        switch (choice)
+        {
+            case "1":
+                Console.WriteLine($"Длительность: {(int)duration.TotalHours} ч {duration.Minutes} мин");
+                break;
+            case "2":
+                Console.WriteLine($"Длительность: {duration.TotalMinutes:F0} мин");
+                break;
+            case "3":
+                Console.WriteLine($"Длительность: {duration.TotalHours:F2} ч");
+                break;
+            case "4":
+                Console.WriteLine($"Длительность: {duration.TotalSeconds:F0} сек");
+                break;
+            default:
+                Console.WriteLine("Неизвестный формат.");
+                break;
+        }
+    }
+
         // СТУДЕНТ 6: Добавьте сюда метод CalculateSquats()
         //
         // СТУДЕНТ 7: Добавьте сюда метод CalculateWorkoutCalories()
